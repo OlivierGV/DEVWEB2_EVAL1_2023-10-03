@@ -1,7 +1,7 @@
 <?php
     /* Le header de mon site Apical
-     * -> Contient les informations globales de mon site
-     */
+    * -> Contient les informations globales de mon site
+    */
 ?>
 <!DOCTYPE html>
 <html lang="fr-CA">
@@ -38,3 +38,22 @@
     <link rel="stylesheet" href="wp-content/themes/apical/style.css">
     <link href="https://fonts.googleapis.com/css?family=Homemade+Apple" rel="stylesheet">
 </head>
+<body id="messtyles">
+<div class="aucunepubauto">
+        <div class="logo fix-menu" id="zoneentete">
+            <div class="container">
+                <div class="avant"></div>
+                <div class="apres">
+                    <div id="menuicones" class="porteuroffset fix-menu" data-verticaloffset="47" data-horizontaloffset="0"> <a href="https://apical.xyz"><img src="https://apical.xyz/medias/commun/Accueil-MenuSecondaire.svg" alt="Accueil" title="Accueil" /></a> <a href="#" class="ouvrirpopupchristiane ouvrirpopuprecherche" data-target="#popuprecherche"><img src="https://apical.xyz/medias/commun/Rechercher-MenuSecondaire.svg" alt="Recherche" title="Rechercher" /></a> <a href="#" class="ouvrirpopupchristiane ouvrirpopupauthentification" data-target="#popupauthentification"><img src="https://apical.xyz/medias/commun/Login-MenuSecondaire.svg" alt="Authentification" title="" /></a> </div>
+                </div>
+                <div class="centre"> <a href="index.php"><img src="https://apical.xyz/medias/fr/LogoApical-blanc.svg" alt="Apical, ma plateforme d'apprentissage" /></a> </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-light py-lg-3" id="mainNav">
+            <div class="container"> <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Apical</a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Basculer"> <span class="navbar-toggler-icon"></span> </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav mx-auto">
+                    <?php
+                        //Ajouter l'onglet formations et blogue dans la navbar pour la similarité d'Apical
+                        formations_blogue();
+                    ?>

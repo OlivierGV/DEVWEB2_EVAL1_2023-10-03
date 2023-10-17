@@ -12,41 +12,59 @@
         //Mes paramètres
         $maTable = "wp_posts";
         //Ma requête
-        $requete = "SELECT id AS id_du_post, post_title, post_content AS commentaire FROM $maTable";
+        $requete = "SELECT wp_posts.post_title AS post_title, wp_posts.id AS post_id, comment_ID AS comment_id, comment_content AS comment FROM wp_posts LEFT JOIN wp_comments ON comment_post_ID = wp_posts.id";
         //Mes résultats
         $resultat = $wpdb->get_results($requete);
         $erreur_sql = $wpdb->last_error;
-        //Afficher un message correspondant à la fin de l'action
+        //Vérifier s'il y a un erreur
         if ("" == $erreur_sql){
+            //Si la requête marche et qu'il y au moins 1 enregistrement
             if($wpdb->num_rows > 0){
+                    //Boucle pour chaque résultat trouvé
                     foreach($resultat as $enreg)
                     {
                         ?>
-                        <div class="card border-bottom-0">                                                           
+                        <div class="card border-bottom-0">   
+                            <!-- Onglet -->                                                      
                             <div class="card-header" id="">
-                                <a data-toggle="collapse" href="#<?php echo($enreg->id_du_post); ?>"> <!-- le href permet la liste déroulante -->
+                                <a data-toggle="collapse" href="#<?php echo($enreg->post_id); ?>">
                                     <span class="titrealigneboutons"><?php echo($enreg->post_title); ?></span>
                                 </a>
                             </div>
-                            <div class="collapse" aria-expanded="false" id="<?php echo($enreg->id_du_post); ?>"> <!-- L'id et le href doivent être identiques -->
+                            <!-- Liste déroulante -->
+                            <div class="collapse" aria-expanded="false" id="<?php echo($enreg->post_id); ?>">
                                 <div class="card-body aucune-marge-haut-bas listefichesajax">
-                                    <span class="encoursdegeneration"><?php echo($enreg->commentaire) ?></span>
+                                    <span class="encoursdegeneration">                            
+                                        <span class="encoursdegeneration">
+                                            <!-- Permettre de retourner à l'accueil -->
+                                            <a href=<?php home_url(); ?>>
+                                            <?php
+                                            //Si tu vois un commentaire, affiche-le
+                                            if($enreg->comment)
+                                                echo($enreg->comment);
+                                            //Sinon, informe l'utilisateur
+                                            else
+                                                echo("Aucun commentaire");
+                                            ?>
+                                            </a>
+                                        </span> 
+                                    </span>
                                 </div>
                             </div>
                         </div>
                         <?php
                     }      
-                    ?>
-            <?php
             }
-            else //Si aucune données n'a été trouvées
+            //Si aucune données n'a été trouvées
+            else
             {
                 echo '<div class="message-avertissement">';
                 _e("Aucune donnée ne correspond à vos critères.");
                 echo '</div>';
             }
         }
-        else //Si aucune connexion n'a été établie
+        //Si aucune connexion n'a été établie
+        else
         {
             echo '<div class="message-erreur">';
             _e("Un problème est survenu.");
@@ -54,43 +72,7 @@
         }
     }
 
-    function contenu_sidebar(){
-            echo('
-            <div class="popupchristiane" id="popuprecherche">
-        <form method="get" action="https://apical.xyz/rechercherFormationsPagesAjax"> <input name="rechercher" type="text" id="rechercher" placeholder="Rechercher" required /> <a id="soumettrerecherche" href="#"><img src="https://apical.xyz/medias/commun/BoutonRechercher.svg" class="boutonrechercher" title="Rechercher dans tout le site" alt="Soumettre" /></a> </form> <span class="boutonrefermer"></span>
-    </div>
-    <div class="popupchristiane" id="popupauthentification">
-        <div id="menuusager" class="cache">
-            <p><label id="prenomnomfamille"></label></p> <a class="btn btn-secondary" href="https://apical.xyz/usagers/-1/modification">Profil</a> <a class="btn btn-secondary" id="deconnecter" href="#">Déconnecter</a>
-        </div>
-        <div id="formulaireauthentification"> <span id="messageauthentification"></span>
-            <form method="post" action="https://apical.xyz/usagers/authentifier" class="form-horizontal"> <input type="hidden" name="_token" value="EFGolN8urKrEnhBYRRavZ4YPwHzJ3smIHDRnNeYy">
-                <div class="form-group row"> <label for="login" class="control-label col-sm-5 requis">Usager: </label>
-                    <div class=col-sm-6> <input type="text" class="form-control" name="login" id="login" autofocus> </div>
-                </div>
-                <div class="form-group row"> <label for="motdepasse" class="control-label col-sm-5 requis">Mot de passe: </label>
-                    <div class=col-sm-6> <input type="password" class="form-control" name="motdepasse" id="motdepasse"> </div>
-                </div>
-                <div class="form-group row">
-                    <div class="control-label col-sm-5"></div>
-                    <div class="col-sm-6">
-                        <div class="form-check"> <label for="resterconnecte" class="form-check-label" checked> <input class="form-check-input" type="checkbox" id="resterconnecte" name="resterconnecte"> Rester connecté </label> </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="control-label col-sm-5"></div>
-                    <div class="col-sm-6"> <a id="soumettreauthentification" class="btn btn-secondary" href="#">Soumettre</a> </div>
-                </div>
-                <div class="form-group row">
-                    <div class="control-label col-sm-5"></div>
-                    <div class="col-sm-6"> <a href="https://apical.xyz/usagers/creation">Nouvel usager</a> </div>
-                </div>
-            </form>
-        </div> <span class="boutonrefermer"></span>
-    </div>
-    <div class="popupchristiane" id="popupbienvenue"></div>');
-    }
-
+    //Afficher Formations et Blogue
     function formations_blogue() {
         $id_pages = get_all_page_ids();
         foreach($id_pages as $page)
@@ -108,6 +90,7 @@
         }
     }
 
+    //Afficher Hachage, Générateur et Icônes
     function liste_outils() {
         $id_pages = get_all_page_ids();
         $retour_positif = false;
@@ -129,6 +112,7 @@
         }                    
     }
 
+    //Afficher Contact et À propos
     function liste_aide() {
         $id_pages = get_all_page_ids();
         $retour_positif = false;

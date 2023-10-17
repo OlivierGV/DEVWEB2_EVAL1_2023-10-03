@@ -8,25 +8,6 @@
     /* Appeler "header.php" */
     get_header();
 ?>
-<body id="messtyles">
-    <div class="aucunepubauto">
-        <div class="logo fix-menu" id="zoneentete">
-            <div class="container">
-                <div class="avant"></div>
-                <div class="apres">
-                    <div id="menuicones" class="porteuroffset fix-menu" data-verticaloffset="47" data-horizontaloffset="0"> <a href="https://apical.xyz"><img src="https://apical.xyz/medias/commun/Accueil-MenuSecondaire.svg" alt="Accueil" title="Accueil" /></a> <a href="#" class="ouvrirpopupchristiane ouvrirpopuprecherche" data-target="#popuprecherche"><img src="https://apical.xyz/medias/commun/Rechercher-MenuSecondaire.svg" alt="Recherche" title="Rechercher" /></a> <a href="#" class="ouvrirpopupchristiane ouvrirpopupauthentification" data-target="#popupauthentification"><img src="https://apical.xyz/medias/commun/Login-MenuSecondaire.svg" alt="Authentification" title="" /></a> </div>
-                </div>
-                <div class="centre"> <a href="index.php"><img src="https://apical.xyz/medias/fr/LogoApical-blanc.svg" alt="Apical, ma plateforme d'apprentissage" /></a> </div>
-            </div>
-        </div>
-        <nav class="navbar navbar-expand-lg navbar-light py-lg-3" id="mainNav">
-            <div class="container"> <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Apical</a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Basculer"> <span class="navbar-toggler-icon"></span> </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav mx-auto">
-                        <?php
-                            //Ajouter l'onglet formations et blogue dans la navbar pour la similarité d'Apical
-                            formations_blogue();
-                        ?>
                         <li class="nav-item px-lg-4 dropdown"> <a href="https://apical.xyz/pages/formulairebcrypt" class="dropdown-toggle nav-link text-uppercase text-expanded  " data-toggle="dropdown" data-target="#" aria-haspopup="true" aria-expanded="false">Outils </a>
                             <div class="dropdown-menu">
                                  <?php
@@ -82,14 +63,10 @@
         </div>
     </div>
     <?php
+        /* Appeler "sidebar.php" */
+        get_sidebar();
         /* Appeler "footer.php" */
         get_footer();
-    ?>
-    <?php
-        /* Appelle de la fonction "contenu_sidebar();"
-         * -> Me permet d'afficher les formulaires dans la sidebar
-         */
-        contenu_sidebar();
     ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://apical.xyz/js/jquery.js?id=6a07da9fae934baf3f749e876bbfdd96"></script>
