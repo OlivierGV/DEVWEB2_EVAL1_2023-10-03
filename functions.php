@@ -14,14 +14,14 @@
         //Ma requête
         $requete = "SELECT wp_posts.post_title AS post_title, wp_posts.id AS post_id, comment_ID AS comment_id, comment_content AS comment FROM wp_posts LEFT JOIN wp_comments ON comment_post_ID = wp_posts.id";
         //Mes résultats
-        $resultat = $wpdb->get_results($requete);
+        $resultats = $wpdb->get_results($requete);
         $erreur_sql = $wpdb->last_error;
         //Vérifier s'il y a un erreur
         if ("" == $erreur_sql){
             //Si la requête marche et qu'il y au moins 1 enregistrement
             if($wpdb->num_rows > 0){
                     //Boucle pour chaque résultat trouvé
-                    foreach($resultat as $enreg)
+                    foreach($resultats as $enreg)
                     {
                         ?>
                         <div class="card border-bottom-0">   
