@@ -8,6 +8,10 @@
     */
     echo("<h1> Erreur 404 </h1>");
 
+    /* Appeler la sidebar
+    */
+    get_sidebar();
+    
     /* Appeler footer
      * -> Le fin de la page
      */
